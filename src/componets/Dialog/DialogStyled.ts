@@ -12,6 +12,8 @@ export const DialogOverlay = styled.div<Props>`
   justify-content: center;
   align-items: center;
   position: absolute;
+  padding: ${(porps) =>
+    `${porps.theme.margin?.regular} ${porps.theme.margin?.large}`};
   ${(props) =>
     !props.isOpen &&
     css`
@@ -23,9 +25,13 @@ export const DialogWrapper = styled.div`
   background-color: ${(porps) => porps.theme.palette.grey[500]};
   border: 2px solid ${(porps) => porps.theme.palette.grey[100]};
   border-radius: ${(porps) => porps.theme.margin?.small};
-  padding: 10px 60px;
+  padding: ${(porps) =>
+    `${porps.theme.margin?.small} ${porps.theme.margin?.regular}`};
+  min-width: 50%;
+  min-height: 30%;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 `;
 
 export const DialogConttrollersWrapper = styled.div`
@@ -33,4 +39,5 @@ export const DialogConttrollersWrapper = styled.div`
   align-self: flex-end;
   margin-top: ${(props) => props.theme.margin?.regular};
   gap: ${(props) => props.theme.margin?.small};
+  padding: 10px 25px;
 `;

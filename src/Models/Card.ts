@@ -1,4 +1,4 @@
 export type ICard = {
-  id?: number;
+  id?: number | string;
   description: string;
 };

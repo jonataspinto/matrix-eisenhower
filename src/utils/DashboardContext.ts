@@ -5,7 +5,8 @@ import { FrameModel } from "../Models/Frame";
 
 interface IDashboardContext {
   frames: Array<FrameModel>;
-  move: (fromFrame: number, toFrame: number, from: number, to: number) => void;
+  move: (fromFrame: number, from: number, to: number) => void;
+  moveInList: (fromFrame: number, toFrame: number, indexItem: number) => void;
   addCard: (card: ICard) => void;
   removeCard: (frameIndex: number, cardIndex: number) => void;
 }
@@ -13,6 +14,7 @@ interface IDashboardContext {
 export default createContext<IDashboardContext>({
   frames: [],
   move: () => {},
+  moveInList: () => {},
   addCard: () => {},
   removeCard: () => {},
 });

@@ -2,6 +2,7 @@
 import React, { useContext, useRef } from "react";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import { XYCoord } from "dnd-core";
+
 import DashboardContext from "../../utils/DashboardContext";
 import { ICard } from "../../Models/Card";
 import * as S from "./CardStyled";
@@ -14,7 +15,7 @@ interface CardProps extends ICard {
 const Card: React.FC<CardProps> = ({ description, index, frameIndex }) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const dashboardContext = useContext(DashboardContext);
+  const { move, removeCard } = useContext(DashboardContext);
 
   const [collectedProps, dragRef] = useDrag({
     item: {
@@ -64,12 +65,7 @@ const Card: React.FC<CardProps> = ({ description, index, frameIndex }) => {
         return;
       }
 
-      dashboardContext.move(
-        draggedListIndex,
-        targetListIndex,
-        draggedIndex,
-        targetIndex,
-      );
+      move(draggedListIndex, draggedIndex, targetIndex);
 
       item.index = targetIndex;
       item.listIndex = targetListIndex;
@@ -81,6 +77,16 @@ const Card: React.FC<CardProps> = ({ description, index, frameIndex }) => {
   return (
     <S.CardWrapper ref={ref} isDragging={collectedProps.isDragging}>
       <S.CardDescription>{description}</S.CardDescription>
+      <S.EditArea>
+        <S.DropCardButton
+          width="20px"
+          onClick={() => removeCard(frameIndex, index)}
+        />
+        <S.EditCardButton
+          width="20px"
+          onClick={() => removeCard(frameIndex, index)}
+        />
+      </S.EditArea>
     </S.CardWrapper>
   );
 };

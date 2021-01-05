@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import mutter from "immer";
+import { v4 as uuid } from "uuid";
 import Frame from "../../componets/Frame/Frame";
 import DashboardContext from "../../utils/DashboardContext";
 import * as S from "./DashboardStyled";
 import { mock } from "./mock";
 import { ICard } from "../../Models/Card";
 import Dialog from "../../componets/Dialog/Dialog";
+import Input from "../../componets/Input/Input";
+
+const initialState = {
+  description: "",
+  id: "",
+};
 
 const Dashboard: React.FC = () => {
   const [frames, setFrames] = useState(mock);
-  const [newCard, setNewCard] = useState({
-    description: "",
-    id: 0,
-  });
+  const [newCard, setNewCard] = useState(initialState);
 
   useEffect(() => {
     if (localStorage.getItem("frames")) {
@@ -26,22 +30,28 @@ const Dashboard: React.FC = () => {
     localStorage.setItem("frames", JSON.stringify(frames));
   }, [frames]);
 
-  const move = (
-    fromFrame: number,
-    toFrame: number,
-    from: number,
-    to: number,
-  ) => {
-    // console.log("fromFrame", fromFrame);
-    // console.log(toFrame);
-    // console.log(from);
-    // console.log(to);
+  const move = (fromFrame: number, from: number, to: number) => {
     setFrames(
       mutter(frames, (draft) => {
         const dragged = draft[fromFrame].cards[from];
 
         draft[fromFrame].cards.splice(from, 1);
-        draft[toFrame].cards.splice(to, 0, dragged);
+        draft[fromFrame].cards.splice(to, 0, dragged);
+      }),
+    );
+  };
+
+  const moveInList = (
+    fromFrame: number,
+    toFrame: number,
+    indexItem: number,
+  ) => {
+    setFrames(
+      mutter(frames, (draft) => {
+        const dragged = draft[fromFrame].cards[indexItem];
+
+        draft[fromFrame].cards.splice(indexItem, 1);
+        draft[toFrame].cards.push(dragged);
       }),
     );
   };
@@ -56,20 +66,22 @@ const Dashboard: React.FC = () => {
     }));
   };
 
-  const addCard = (card: ICard) => {
-    const id = Math.random() * 456;
-    setNewCard({
-      ...card,
-      id,
-    });
+  const addCard = async (card: ICard) => {
+    const id = await uuid();
 
     setFrames(
       mutter(frames, (draft) => {
-        draft[0].cards.push(newCard);
+        const copyCard = {
+          ...card,
+          id,
+        };
+        draft[0].cards.push(copyCard);
       }),
     );
 
-    localStorage.setItem("frames", JSON.stringify(frames));
+    await localStorage.setItem("frames", JSON.stringify(frames));
+
+    setNewCard(initialState);
   };
 
   const removeCard = (frameIndex: number, cardIndex: number) => {
@@ -91,6 +103,7 @@ const Dashboard: React.FC = () => {
         move,
         addCard,
         removeCard,
+        moveInList,
       }}
     >
       <S.DashboardWrapper>
@@ -111,7 +124,12 @@ const Dashboard: React.FC = () => {
               setIsOpen(false);
             }}
           >
-            <input name="description" placeholder="" onChange={handleChange} />
+            <Input
+              label="Descrição"
+              name="description"
+              value={newCard.description}
+              onChange={handleChange}
+            />
           </Dialog>
         </S.DashboardContainer>
       </S.DashboardWrapper>
