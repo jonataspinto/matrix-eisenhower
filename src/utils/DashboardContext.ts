@@ -1,6 +1,7 @@
-import { createContext } from 'react';
-import { ICard } from '../Models/Card';
-import { FrameModel } from '../Models/Frame';
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { createContext } from "react";
+import { ICard } from "../Models/Card";
+import { FrameModel } from "../Models/Frame";
 
 interface IDashboardContext {
   frames: Array<FrameModel>;

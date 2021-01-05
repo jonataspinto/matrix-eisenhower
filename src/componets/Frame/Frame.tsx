@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
-// import { useDrop } from 'react-dnd';
-import { ICard } from '../../Models/Card';
-import DashboardContext from '../../utils/DashboardContext';
-import Card from '../Card/Card';
-import * as S from './FrameStyled';
+import React from "react";
+import { Plus } from "@styled-icons/bootstrap/Plus";
+import { ICard } from "../../Models/Card";
+import Card from "../Card/Card";
+import * as S from "./FrameStyled";
 
 interface FrameProps {
   frame: {
@@ -11,21 +10,17 @@ interface FrameProps {
     position: number;
     description: string;
     cards: ICard[];
-  },
-  frameIndex: number,
-  handleDialog?: () => void,
+  };
+  frameIndex: number;
+  handleDialog: () => void;
 }
 
-const Frame: React.FC<FrameProps> = ({
-  frame,
-  frameIndex,
-  handleDialog
-}) => {
+const Frame: React.FC<FrameProps> = ({ frame, frameIndex, handleDialog }) => {
   // const [collectedProps, dropRef] = useDrop({
   //   accept: 'CARD',
   // })
 
-  const dashboardContext = useContext(DashboardContext);
+  // const dashboardContext = useContext(DashboardContext);
 
   return (
     <S.FrameWrapper
@@ -33,12 +28,8 @@ const Frame: React.FC<FrameProps> = ({
       typeFrame={frame.typeFrame}
     >
       <S.AboutFrame>
-        <S.FrameNumber>
-          {frame.position}
-        </S.FrameNumber>
-        <S.FrameDescription>
-          {frame.description}
-        </S.FrameDescription>
+        <S.FrameNumber>{frame.position}</S.FrameNumber>
+        <S.FrameDescription>{frame.description}</S.FrameDescription>
       </S.AboutFrame>
       <S.FrameContent>
         {frame.cards.map((card, index) => (
@@ -50,14 +41,14 @@ const Frame: React.FC<FrameProps> = ({
             description={card.description}
           />
         ))}
-        {frame.typeFrame === 'doFirst' && (
+        {frame.typeFrame === "doFirst" && (
           <S.AddCardButton onClick={handleDialog}>
-            Add 
+            <Plus width="30px" />
           </S.AddCardButton>
         )}
       </S.FrameContent>
     </S.FrameWrapper>
-  )
-}
+  );
+};
 
-export default Frame
+export default Frame;

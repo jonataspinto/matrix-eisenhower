@@ -1,53 +1,54 @@
 import { FrameModel } from "../../Models/Frame";
+
 export const mock: FrameModel[] = [
   {
-    description:"description frame",
+    description: "Urgente e Importante",
     position: 1,
-    typeFrame:"doFirst",
+    typeFrame: "doFirst",
     cards: [
       {
         id: 11,
-        description: 'description of 11º'
+        description: "description of 11º",
       },
       {
         id: 12,
-        description: 'description of 12º'
+        description: "description of 12º",
       },
       {
         id: 13,
-        description: 'description '
-      }
-    ]
+        description: "description ",
+      },
+    ],
   },
   {
-    description:"description frame",
+    description: "Não Urgente e Importante",
     position: 2,
-    typeFrame:"schedule",
+    typeFrame: "schedule",
     cards: [
       {
         id: 14,
-        description: 'some card schedule'
+        description: "some card schedule",
       },
       {
         id: 15,
-        description: 'description some full'
+        description: "description some full",
       },
       {
         id: 16,
-        description: 'description atech'
-      }
-    ]
+        description: "description atech",
+      },
+    ],
   },
   {
-    description:"description frame",
+    description: "Urgente e Não Importante",
     position: 3,
-    typeFrame:"delegate",
-    cards: []
+    typeFrame: "delegate",
+    cards: [],
   },
   {
-    description:"description frame",
+    description: "Não Urgente e Não Importante",
     position: 4,
-    typeFrame:"notDo",
-    cards: []
+    typeFrame: "notDo",
+    cards: [],
   },
-]
+];

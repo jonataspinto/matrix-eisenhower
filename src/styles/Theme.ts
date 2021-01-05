@@ -52,8 +52,8 @@ export const ThemeDafault: DefaultTheme = {
       main: "#81c784",
     },
     info: {
-      main: "#1695BC"
-    }
+      main: "#1695BC",
+    },
   },
   margin: {
     small: "8px",
@@ -90,4 +90,4 @@ export const ThemeDafault: DefaultTheme = {
       letterSpacing: "-0.01562em",
     },
   },
-}
+};

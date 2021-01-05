@@ -1,13 +1,11 @@
-import React from 'react';
-import { StyleProvider } from './styles';
-import { Dashboard } from './pages';
+import React from "react";
+import { StyleProvider } from "./styles";
+import { Dashboard } from "./pages";
 
-function App() {
-  return (
-    <StyleProvider>
-      <Dashboard />
-    </StyleProvider>
-  );
-}
+const App: React.FC = () => (
+  <StyleProvider>
+    <Dashboard />
+  </StyleProvider>
+);
 
 export default App;

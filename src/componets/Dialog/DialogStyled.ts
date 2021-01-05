@@ -1,21 +1,23 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
-interface Props {
+export type Props = {
   isOpen: boolean;
-}
+};
 
 export const DialogOverlay = styled.div<Props>`
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  ${(props) => !props.isOpen && css`
-    display: none;
-  `}
-`
+  ${(props) =>
+    !props.isOpen &&
+    css`
+      display: none;
+    `}
+`;
 
 export const DialogWrapper = styled.div`
   background-color: ${(porps) => porps.theme.palette.grey[500]};
@@ -23,5 +25,12 @@ export const DialogWrapper = styled.div`
   border-radius: ${(porps) => porps.theme.margin?.small};
   padding: 10px 60px;
   display: flex;
-  flex-direction: column;  
-`
+  flex-direction: column;
+`;
+
+export const DialogConttrollersWrapper = styled.div`
+  display: flex;
+  align-self: flex-end;
+  margin-top: ${(props) => props.theme.margin?.regular};
+  gap: ${(props) => props.theme.margin?.small};
+`;
