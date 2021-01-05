@@ -29,6 +29,7 @@ const Card: React.FC<CardProps> = ({ description, index, frameIndex }) => {
 
   const [, dropRef] = useDrop({
     accept: "CARD",
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     drop(item: any, monitor: DropTargetMonitor) {
       if (!ref.current) {
         return;

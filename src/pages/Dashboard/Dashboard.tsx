@@ -17,6 +17,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     if (localStorage.getItem("frames")) {
       const data = localStorage.getItem("frames");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setFrames(JSON.parse(data as any));
     }
   }, []);
@@ -31,10 +32,10 @@ const Dashboard: React.FC = () => {
     from: number,
     to: number,
   ) => {
-    console.log("fromFrame", fromFrame);
-    console.log(toFrame);
-    console.log(from);
-    console.log(to);
+    // console.log("fromFrame", fromFrame);
+    // console.log(toFrame);
+    // console.log(from);
+    // console.log(to);
     setFrames(
       mutter(frames, (draft) => {
         const dragged = draft[fromFrame].cards[from];
@@ -45,6 +46,7 @@ const Dashboard: React.FC = () => {
     );
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (event: any) => {
     const { name, value } = event.target as HTMLInputElement;
 
