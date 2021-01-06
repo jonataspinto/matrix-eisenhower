@@ -9,6 +9,7 @@ interface IDashboardContext {
   moveInList: (fromFrame: number, toFrame: number, indexItem: number) => void;
   addCard: (card: ICard) => void;
   removeCard: (frameIndex: number, cardIndex: number) => void;
+  updateCard: (frameIndex: number, cardIndex: number, cardData: ICard) => void;
 }
 
 export default createContext<IDashboardContext>({
@@ -17,4 +18,5 @@ export default createContext<IDashboardContext>({
   moveInList: () => {},
   addCard: () => {},
   removeCard: () => {},
+  updateCard: () => {},
 });

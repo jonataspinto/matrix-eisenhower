@@ -94,6 +94,20 @@ const Dashboard: React.FC = () => {
     localStorage.setItem("frames", JSON.stringify(frames));
   };
 
+  const updateCard = (
+    frameIndex: number,
+    cardIndex: number,
+    cardData: ICard,
+  ) => {
+    setFrames(
+      mutter(frames, (draft) => {
+        draft[frameIndex].cards.splice(cardIndex, 1, cardData);
+      }),
+    );
+
+    localStorage.setItem("frames", JSON.stringify(frames));
+  };
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -104,6 +118,7 @@ const Dashboard: React.FC = () => {
         addCard,
         removeCard,
         moveInList,
+        updateCard,
       }}
     >
       <S.DashboardWrapper>

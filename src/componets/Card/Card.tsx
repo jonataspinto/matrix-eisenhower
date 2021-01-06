@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import { XYCoord } from "dnd-core";
 
@@ -12,12 +12,16 @@ interface CardProps extends ICard {
   frameIndex: number;
 }
 
-const Card: React.FC<CardProps> = ({ description, index, frameIndex }) => {
+const Card: React.FC<CardProps> = ({ description, id, index, frameIndex }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [currentCard] = useState({
+    description,
+    id,
+  });
 
-  const { move, removeCard } = useContext(DashboardContext);
+  const { move, removeCard, updateCard } = useContext(DashboardContext);
 
-  const [collectedProps, dragRef] = useDrag({
+  const [{ isDragging }, dragRef] = useDrag({
     item: {
       type: "CARD",
       index,
@@ -75,7 +79,7 @@ const Card: React.FC<CardProps> = ({ description, index, frameIndex }) => {
   dragRef(dropRef(ref));
 
   return (
-    <S.CardWrapper ref={ref} isDragging={collectedProps.isDragging}>
+    <S.CardWrapper ref={ref} isDragging={isDragging}>
       <S.CardDescription>{description}</S.CardDescription>
       <S.EditArea>
         <S.DropCardButton
@@ -84,7 +88,7 @@ const Card: React.FC<CardProps> = ({ description, index, frameIndex }) => {
         />
         <S.EditCardButton
           width="20px"
-          onClick={() => removeCard(frameIndex, index)}
+          onClick={() => updateCard(frameIndex, index, currentCard)}
         />
       </S.EditArea>
     </S.CardWrapper>
